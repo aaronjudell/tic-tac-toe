@@ -19,7 +19,7 @@ function Gameboard() {
 //a returned function that places the marker on the board
     const placeMarker = (row, column, player) => {
         // Return and don't do anything if there's already an X or O placed.
-        if (board[row][column].getValue) return;
+        if (board[row][column].getValue() !== 0) return;
 
         // If cell isn't already filled, place marker.
         board[row][column].addMarker(player);
