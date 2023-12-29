@@ -31,10 +31,35 @@ function Gameboard() {
         console.log(boardFilled);
     }
 
+    const checkWinner = () => {
+        //Check rows
+        for (let i = 0; i < rows; i++) {
+            if (
+                board[i][0].getValue() !== 0 &&
+                board[i][0].getValue() === board[i][1].getValue() &&
+                board[i][1].getValue() === board[i][2].getValue()
+            ) {
+                return board[i][0].getValue();
+            }
+        }
+
+        //Check columns
+        for (let i = 0; i < columns; i++) {
+            if (
+                board[0][i].getValue() !== 0 &&
+                board[0][i].getValue() === board[1][i].getValue() &&
+                board[1][i].getValue() === board[2][i].getValue()
+            ) {
+                return board[0][i].getValue();
+            }
+        }
+    }
+
     return {
         getBoard,
         placeMarker,
-        printBoard
+        printBoard,
+        checkWinner
     };
 
 }
@@ -104,3 +129,5 @@ function GameController(
         getActivePlayer
     };
 }
+
+const game = GameController();
