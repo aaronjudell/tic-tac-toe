@@ -53,6 +53,8 @@ function Gameboard() {
                 return board[0][i].getValue();
             }
         }
+
+        return -1;
     }
 
     return {
@@ -117,9 +119,18 @@ function GameController(
         console.log(`${getActivePlayer().name} just went.`);
         
         if (board.placeMarker(row, column, getActivePlayer().marker) !== 0) {
-        switchTurn();
-        }
+            const winner = board.checkWinner();
+            if (winner !== -1) {
+                board.printBoard();
+                console.log(`${getActivePlayer().name} wins!`);
+            }
+            else {
+              switchTurn();
+              printNewRound();
+            }
+        } else {
         printNewRound();
+        }
     }
 
     printNewRound();
