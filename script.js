@@ -158,4 +158,23 @@ function GameController(
     };
 }
 
-const game = GameController();
+function ScreenController() {
+    const game = GameController();
+    const playerTurnDiv = document.querySelector('.turn');
+    const board = document.querySelector('.board');
+
+    const updateScreen = () => {
+        for (let i = 0; i < 9; i++) {
+            const box = document.createElement('div');
+            box.classList.add('boxes', `box${i + 1}`);
+            box.addEventListener('click', () => handleCellClick(i));
+            board.appendChild(box);
+        }
+    }
+
+
+
+    updateScreen();
+}
+
+test = ScreenController();
