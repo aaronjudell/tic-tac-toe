@@ -20,9 +20,10 @@ function Gameboard() {
     const placeMarker = (row, column, player) => {
         // Return and don't do anything if there's already an X or O placed.
         if (board[row][column].getValue() == "") {
-
+            if (checkWinner() === -1) {
             // If cell isn't already filled, place marker.
-            board[row][column].addMarker(player);
+                board[row][column].addMarker(player);
+            }
         } else {
             return 0;
         }
