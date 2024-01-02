@@ -19,10 +19,13 @@ function Gameboard() {
 //a returned function that places the marker on the board
     const placeMarker = (row, column, player) => {
         // Return and don't do anything if there's already an X or O placed.
-        if (board[row][column].getValue() !== 0) return 0;
+        if (board[row][column].getValue() == "") {
 
-        // If cell isn't already filled, place marker.
-        board[row][column].addMarker(player);
+            // If cell isn't already filled, place marker.
+            board[row][column].addMarker(player);
+        } else {
+            return 0;
+        }
         
     }
 
@@ -35,7 +38,7 @@ function Gameboard() {
         //Check rows
         for (let i = 0; i < rows; i++) {
             if (
-                board[i][0].getValue() !== 0 &&
+                board[i][0].getValue() !== "" &&
                 board[i][0].getValue() === board[i][1].getValue() &&
                 board[i][1].getValue() === board[i][2].getValue()
             ) {
@@ -46,7 +49,7 @@ function Gameboard() {
         //Check columns
         for (let i = 0; i < columns; i++) {
             if (
-                board[0][i].getValue() !== 0 &&
+                board[0][i].getValue() !== "" &&
                 board[0][i].getValue() === board[1][i].getValue() &&
                 board[1][i].getValue() === board[2][i].getValue()
             ) {
@@ -56,7 +59,7 @@ function Gameboard() {
 
         //Check diagonals
         if (
-            board[0][0].getValue() !== 0 &&
+            board[0][0].getValue() !== "" &&
             board[0][0].getValue() === board[1][1].getValue() &&
             board[1][1].getValue() === board[2][2].getValue()
         ) {
@@ -64,7 +67,7 @@ function Gameboard() {
         }
 
         if (
-            board[0][2].getValue() !== 0 &&
+            board[0][2].getValue() !== "" &&
             board[0][2].getValue() === board[1][1].getValue() &&
             board[1][1].getValue() === board[2][0].getValue()
         ) {
@@ -84,7 +87,7 @@ function Gameboard() {
 }
 
 function Cell() {
-    let value = 0;
+    let value = "";
 
     const addMarker = (player) => {
         value = player;
