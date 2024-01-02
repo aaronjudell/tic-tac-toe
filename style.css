@@ -8,7 +8,7 @@ body {
     justify-content: center;
 }
 
-.header {
+.header, .turn {
     text-align: center;
     font-size: 2em;
     padding-top: 50px;
@@ -35,6 +35,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: transparent;
+    font-size: 0;
+    border: none;
 }
 
 .box1, .box2, .box4, .box7, .box8 {

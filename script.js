@@ -129,7 +129,8 @@ function GameController(
 
     const printNewRound = () => {
         board.printBoard();
-        console.log(`${getActivePlayer().name}'s turn.`)
+        const turn = document.querySelector('.turn');
+        console.log(`${getActivePlayer().name}'s turn.`);
     }
 
     const playRound = (row, column) => {
@@ -154,27 +155,46 @@ function GameController(
 
     return {
         playRound,
-        getActivePlayer
+        getActivePlayer,
+        getBoard: board.getBoard
     };
 }
 
 function ScreenController() {
     const game = GameController();
     const playerTurnDiv = document.querySelector('.turn');
-    const board = document.querySelector('.board');
+    const boardDiv = document.querySelector('.board');
 
     const updateScreen = () => {
+
+        boardDiv.textContent = "";
+
+        const board = game.getBoard();
+        const activePlayer = game.getActivePlayer();
+
+        playerTurnDiv.textContent = `${activePlayer.name}'s turn!`;
+/*
         for (let i = 0; i < 9; i++) {
             const box = document.createElement('div');
             box.classList.add('boxes', `box${i + 1}`);
             box.addEventListener('click', () => handleCellClick(i));
-            board.appendChild(box);
-        }
+*/      
+        i = 0;
+        board.forEach(row => {
+            row.forEach((cell, index) => {
+                const cellButton = document.createElement('button');
+                cellButton.classList.add('boxes', `box${i+1}`);
+                cellButton.dataset.column = index;
+                cellButton.dataset.row = row;
+                cellButton.dataset.textContent = cell.getValue();
+                boardDiv.appendChild(cellButton);
+                i++;
+            })
+        })
+            
     }
-
-
 
     updateScreen();
 }
 
-test = ScreenController();
+ScreenController();
