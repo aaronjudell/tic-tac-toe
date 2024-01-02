@@ -192,6 +192,7 @@ function ScreenController() {
             })
         })
 
+        checkTie(board);
         displayWinner(game);
     }
     function clickHandler(row, column) {
@@ -205,6 +206,20 @@ function ScreenController() {
         const player = game.getActivePlayer();
         if (won != -1) {
             playerTurnDiv.textContent = `${player.name} wins!!`;
+        };
+    }
+
+    function checkTie(board) {
+        let full = true;
+        for (const row of board) {
+            for (const cell of row) {
+                if (cell.getValue() === "") {
+                    full = false;
+                }
+            }
+        }
+        if (full === true) {
+            playerTurnDiv.textContent = `It's a tie!`;
         };
     }
 
