@@ -173,28 +173,28 @@ function ScreenController() {
         const activePlayer = game.getActivePlayer();
 
         playerTurnDiv.textContent = `${activePlayer.name}'s turn!`;
-/*
-        for (let i = 0; i < 9; i++) {
-            const box = document.createElement('div');
-            box.classList.add('boxes', `box${i + 1}`);
-            box.addEventListener('click', () => handleCellClick(i));
-*/      
-        i = 0;
-        board.forEach(row => {
-            row.forEach((cell, index) => {
+    
+        let i = 0;
+
+        board.forEach((row, rowIndex) => {
+            row.forEach((cell, columnIndex) => {
                 const cellButton = document.createElement('button');
                 cellButton.classList.add('boxes', `box${i+1}`);
-                cellButton.dataset.column = index;
-                cellButton.dataset.row = row;
-                cellButton.dataset.textContent = cell.getValue();
+                cellButton.textContent = cell.getValue();
+                cellButton.addEventListener("click", () => clickHandler(rowIndex, columnIndex));
                 boardDiv.appendChild(cellButton);
                 i++;
             })
         })
-            
+    }
+    function clickHandler(row, column) {
+        console.log("Clicked on row:", row, "column:", column);
+        game.playRound(row, column);
+        updateScreen();
     }
 
     updateScreen();
+
 }
 
 ScreenController();
