@@ -159,7 +159,8 @@ function GameController(
     return {
         playRound,
         getActivePlayer,
-        getBoard: board.getBoard
+        getBoard: board.getBoard,
+        checkWinner: board.checkWinner
     };
 }
 
@@ -189,11 +190,21 @@ function ScreenController() {
                 i++;
             })
         })
+
+        displayWinner(game);
     }
     function clickHandler(row, column) {
         console.log("Clicked on row:", row, "column:", column);
         game.playRound(row, column);
         updateScreen();
+    }
+
+    function displayWinner(game) {
+        const won = game.checkWinner();
+        const player = game.getActivePlayer();
+        if (won != -1) {
+            playerTurnDiv.textContent = `${player.name} wins!!`;
+        };
     }
 
     updateScreen();
