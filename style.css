@@ -8,10 +8,21 @@ body {
     justify-content: center;
 }
 
-.header, .turn {
+.header, .turn, .button-container {
     text-align: center;
     font-size: 2em;
+}
+
+.header {
     padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.turn {
+    padding-bottom: 50px;
+}
+
+.button-container {
     padding-bottom: 100px;
 }
 
