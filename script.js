@@ -207,6 +207,7 @@ function ScreenController() {
 
     form.addEventListener('submit', () => {
         changeNames();
+        form.reset();
     });
 
     const updateScreen = () => {
