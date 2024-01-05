@@ -131,6 +131,11 @@ function GameController(
 
     const getActivePlayer = () => activePlayer;
 
+    const setPlayerNames = (array) => {
+        players[0].name = array[0];
+        players[1].name = array[1];
+    }
+
     const printNewRound = () => {
         board.printBoard();
         const turn = document.querySelector('.turn');
@@ -160,6 +165,7 @@ function GameController(
     return {
         playRound,
         getActivePlayer,
+        setPlayerNames,
         getBoard: board.getBoard,
         checkWinner: board.checkWinner
     };
@@ -169,6 +175,22 @@ function ScreenController() {
     const game = GameController();
     const playerTurnDiv = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
+    const playerNamesButton = document.querySelector('.player-names-button');
+    const cancelButton = document.querySelector('.cancel-button');
+    const dialog = document.querySelector('.form-container');
+    const form = document.querySelector('.player-names');
+
+    playerNamesButton.addEventListener('click', () => {
+        dialog.showModal();
+    });
+
+    cancelButton.addEventListener('click', () => {
+        dialog.close();
+    });
+
+    form.addEventListener('submit', () => {
+        changeNames();
+    });
 
     const updateScreen = () => {
 
@@ -221,6 +243,15 @@ function ScreenController() {
         if (full === true) {
             playerTurnDiv.textContent = `It's a tie!`;
         };
+    }
+
+    function changeNames() {
+        const player1 = document.querySelector('#player1').value;
+        const player2 = document.querySelector('#player2').value;
+        const playerArray = [player1, player2];
+        console.log(playerArray[0], playerArray[1]);
+        game.setPlayerNames(playerArray);
+        updateScreen();
     }
 
     updateScreen();
