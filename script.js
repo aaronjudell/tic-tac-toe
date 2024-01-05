@@ -106,7 +106,7 @@ function GameController(
     player1name = 'Player One',
     player2name = 'Player Two'
 ) {
-    const board = Gameboard();
+    let board = Gameboard();
 
     const players = [
         {
@@ -120,6 +120,14 @@ function GameController(
     ];
 
     let activePlayer = players[0];
+
+    const resetPlayer = () => {
+        activePlayer = players[0];
+    }
+
+    const clearBoard = () => {
+        board.getBoard().forEach(row => row.forEach(cell => cell.addMarker('')));
+    }
 
     const switchTurn = () => {
         if (activePlayer === players[0]) {
@@ -166,6 +174,8 @@ function GameController(
         playRound,
         getActivePlayer,
         setPlayerNames,
+        resetPlayer,
+        clearBoard,
         getBoard: board.getBoard,
         checkWinner: board.checkWinner
     };
@@ -176,12 +186,19 @@ function ScreenController() {
     const playerTurnDiv = document.querySelector('.turn');
     const boardDiv = document.querySelector('.board');
     const playerNamesButton = document.querySelector('.player-names-button');
+    const resetButton = document.querySelector('.reset-button');
     const cancelButton = document.querySelector('.cancel-button');
     const dialog = document.querySelector('.form-container');
     const form = document.querySelector('.player-names');
 
     playerNamesButton.addEventListener('click', () => {
         dialog.showModal();
+    });
+
+    resetButton.addEventListener('click', () => {
+       game.resetPlayer();
+       game.clearBoard();
+       updateScreen();
     });
 
     cancelButton.addEventListener('click', () => {
